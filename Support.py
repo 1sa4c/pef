@@ -1,11 +1,18 @@
 from SupportType import SupportType
 
 class Support():
-    def __init__(self, x: float, y: float, support_type: SupportType):
-        self.x = x
-        self.y = y
-        self.support_type = support_type
-        print(type(self.support_type))
+    _total_number_of_reactions = 0
 
-    def __str__(self):
-        return f'<Support>[{self.support_type.name}] ({self.x}, {self.y})'
+    @classmethod
+    def _increment_number_of_reactions(cls, x):
+        cls._total_number_of_reactions += x
+
+    def __init__(self, support_type: SupportType):
+        if support_type == SupportType.ROLLER:
+            self._increment_number_of_reactions(1)
+        else:
+            self._increment_number_of_reactions(2)
+
+        self.support_type = support_type
+        self.reaction_force = [None, None]
+
