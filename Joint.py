@@ -25,10 +25,12 @@ class Joint:
         return self.label
 
     def add_load(self, load: Load) -> None:
-        self.loads.append(load)
+        if load not in self.loads:
+            self.loads.append(load)
 
     def set_support(self, support: Support) -> None:
-        self.support = support
+        if(self.support != support):
+            self.support = support
 
     def get_total_load(self) -> tuple[float, float]:
         total_x, total_y = (0, 0)
